@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+	<head>
+		<meta charset="utf-8" />
+		<title>Apache Wicket Quickstart</title>
+		<link href='https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:regular,bold' rel='stylesheet' type='text/css' />
+		<link rel="stylesheet" href="style.css" type="text/css" media="screen" title="Stylesheet" />
+	</head>
+	<body>
+		<div id="hd">
+			<div id="logo">
+				<img src="logo.png" width="50px" height="50px" alt="Wicket Logo" />
+				<h1>Apache Wicket</h1>
+			</div>
+		</div>
+		<div id="bd">
+			<div>
+				<form id="upload-form" action="./test/upload">
+					<input type="text" id="upload-text" name="upload-text" value="text-upload"/>
+					<input type="checkbox" id="upload-chk1" name="upload-chk1" checked="checked" value="chk1-upload"/>
+					<input type="checkbox" id="upload-chk2" name="upload-chk2" value="chk2-upload"/>
+					<input type="file" id="upload-file" name="upload-file"/>
+				</form>
+				<button id="upload-btn">Do Upload!</button>
+			</div>
+			<p>
+				Please mention the correct Wicket version: <wicket:container wicket:id="version">1.5-SNAPSHOT</wicket:container>.
+			</p>
+		</div>
+		<div id="ft">
+		</div>
+	</body>
+</html>
