@@ -1,7 +1,11 @@
 package org.apache.solomax;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
+import org.apache.commons.fileupload.FileItem;
 import org.apache.wicket.protocol.http.servlet.MultipartServletWebRequest;
 import org.apache.wicket.protocol.http.servlet.ServletWebRequest;
 import org.apache.wicket.request.resource.AbstractResource;
@@ -39,9 +43,15 @@ public class UploadResourceReference extends ResourceReference {
 				final ServletWebRequest webRequest = (ServletWebRequest) attributes.getRequest();
 				try {
 					MultipartServletWebRequest multiPartRequest = webRequest.newMultipartWebRequest(Bytes.bytes(10_000_000), "ignored");
-					log.info("Got Multipart request! param count: {}", multiPartRequest.getPostParameters().getParameterNames().size());
+					Map<String, List<FileItem>> fileMap = multiPartRequest.getFiles();
+					log.info("Got Multipart request!");
+					log.info("   - param count: {}", multiPartRequest.getPostParameters().getParameterNames().size());
+					log.info("   - different files count: {}", fileMap.size());
 					for (String name : multiPartRequest.getPostParameters().getParameterNames()) {
 						log.info("   - {} -> {}", name, multiPartRequest.getPostParameters().getParameterValue(name));
+					}
+					for (Entry<String, List<FileItem>> e : fileMap.entrySet()) {
+						log.info("   - {} -> {}", e.getKey(), e.getValue().size());
 					}
 					prepareResponse(response, Status.SUCCESS, "Hooray");
 				} catch (Exception e) {
