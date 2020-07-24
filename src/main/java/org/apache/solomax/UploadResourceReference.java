@@ -43,6 +43,7 @@ public class UploadResourceReference extends ResourceReference {
 				final ServletWebRequest webRequest = (ServletWebRequest) attributes.getRequest();
 				try {
 					MultipartServletWebRequest multiPartRequest = webRequest.newMultipartWebRequest(Bytes.bytes(10_000_000), "ignored");
+					multiPartRequest.parseFileParts();
 					Map<String, List<FileItem>> fileMap = multiPartRequest.getFiles();
 					log.info("Got Multipart request!");
 					log.info("   - param count: {}", multiPartRequest.getPostParameters().getParameterNames().size());
